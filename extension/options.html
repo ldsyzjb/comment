@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form>
+            <div>
+                <span>Comment Max Width: </span>
+                <input type="number" value="220" step="20" min="100" max="300">
+            </div>
+            <div>
+                <span>Font Color: </span>
+                <input type="color">
+                <span>#000000</span>
+            </div>
+            <div>
+                <span>Font Size: </span>
+                <input type="number" value="16" min="12" max="30">
+            </div>
+            <div>
+                <span>Font Family: </span>
+                <select>
+                    <option value="none">none</option>
+                    <option value="serif">serif</option>
+                    <option value="fantasy">fantasy</option>
+                    <option value="-webkit-pictograph">-webkit-pictograph</option>
+                </select>
+                <span>Text Family</span>
+            </div>
+        </form>
+    </div>
+
+    <style>
+        div{ display: flex; margin-bottom: 6px;}
+        div span:first-child { width: 160px; flex: none;}
+        input, select { width: 80px; margin-right: 10px;}
+    </style>
+    <script src="js/options.js"></script>
+</body>
+</html>

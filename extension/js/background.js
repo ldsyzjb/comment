@@ -1,0 +1,15 @@
+
+function sendMessageToContentScript(message, callback){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        chrome.tabs.sendMessage(tabs[0].id, message, function(response){
+            if(callback) callback(response);
+        });
+    });
+}
+chrome.contextMenus.create({
+    title: "页面注释",
+    onclick: function(e){
+        sendMessageToContentScript({create: true}, function(response){
+        });
+    }
+});
