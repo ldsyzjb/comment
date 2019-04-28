@@ -1,7 +1,6 @@
 // import './index.scss'
 
 (() => {
-
     function queryEl(sel, parent){ return parent ? parent.querySelector(sel) : document.querySelector(sel); }
     function hide(){ document.body.className = document.body.className.replace(/pop-active/g, '')}
     function show(){ if(!document.body.className.match(/pop-active/)) document.body.className += ' pop-active'; textarea.focus(); }
@@ -19,9 +18,9 @@
     let temp = document.createElement('div');
         temp.innerHTML = mask;
         mask = temp.children[0];
-
     let textarea = queryEl('.pop-input', mask);
     let location = null;
+    let parentEl = null;
 
     // 处理输入信息
     mask.addEventListener('click', e => {
@@ -37,18 +36,24 @@
                 comment.style.left  = x + 'px';
                 comment.style.top   = y + 'px';
                 comment.innerText   = text;
-            document.body.appendChild(comment)
+            parentEl.appendChild(comment)
+            if(getComputedStyle(parentEl).position == 'static'){
+                parentEl.style.position = 'relative'
+            }
         }
 
         textarea.value = '';
         hide();
     })
-
+    
     document.body.appendChild(mask)
     document.addEventListener('contextmenu', function(e){
-        if(e.button === 2){
-            location = [e.pageX, e.pageY];
-        }
+        // e.preventDefault();
+            // location = [e.pageX, e.pageY];
+            location = [e.offsetX, e.offsetY]
+            parentEl = e.target;
+            // show();
+
     })
     
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
