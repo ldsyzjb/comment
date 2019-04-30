@@ -6,36 +6,73 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <form>
-            <div>
-                <span>Comment Max Width: </span>
-                <input type="number" value="220" step="20" min="100" max="300">
-            </div>
-            <div>
-                <span>Font Color: </span>
-                <span>#000000</span>
-                <input type="color">
-            </div>
-            <div>
-                <span>Font Size: </span>
-                <input type="number" value="16" min="12" max="30">
-            </div>
-            <div>
-                <span>Font Family: </span>
-                <select name="" id="">
-                    <option value="">a</option>
-                    <option value="">a</option>
-                    <option value="">a</option>
-                    <option value="">a</option>
-                </select>
-            </div>
-        </form>
+    <div class="switch method">
+        <span class="left">双击</span>
+        <div class="container">
+            <div class="dot"></div>
+        </div>
+        <span class="right">右键</span>        
     </div>
 
+    <div class="switch">
+        <span class="left">双击</span>
+        <div class="container">
+            <div class="dot"></div>
+        </div>
+        <span class="right">右键</span>
+    </div>
+    
+
     <style>
-        div{ display: flex; margin-bottom: 6px;}
-        div span:first-child { width: 200px; flex: none;}
+        .switch{
+            display: flex;
+        }
+        .switch.right .dot{
+            left: calc(100% - 22px);
+        }
+        .switch.right .container{
+            background: #ea3651;
+        }
+        .switch:not(.right) span.left{
+            color: blue;
+        }
+        .switch.right span.right{
+            color: blue;
+        }
+
+
+        .container{
+            width: 46px; height: 22px;
+            background: lightblue;
+            border-radius: 10px;
+            cursor: pointer;
+
+            margin: 0 4px;
+            position: relative;
+        }
+        .dot{
+            width: 18px; height: 18px;
+            background: white;
+            border-radius: 10px;
+            margin: 2px;
+
+            position: absolute;
+            left: 0;
+            transition: all 0.3s;
+
+        }
+
+        body{
+            width: 140px;
+            height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+    
     </style>
+
+    <script src="js/popup.js"></script>
 </body>
 </html>

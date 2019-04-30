@@ -6,10 +6,31 @@ function sendMessageToContentScript(message, callback){
         });
     });
 }
-chrome.contextMenus.create({
-    title: "页面注释",
-    onclick: function(e){
-        sendMessageToContentScript({create: true}, function(response){
+
+function createContextMenu(){
+    return chrome.contextMenus.create({
+        title: "页面注释",
+        onclick: function(e){
+            sendMessageToContentScript({create: true});
+        }
+    });
+}
+
+
+let contextMenuId;
+
+chrome.storage.local.get('method', function(data){
+    if(data.method == 'contextMenu'){
+        contextMenuId = createContextMenu();
+    }
+})
+
+chrome.runtime.onMessage.addListener(function(data){
+    if(data.method == 'contextMenu' && !contextMenuId){
+        contextMenuId = createContextMenu();
+    }else if(data.method == 'dblClick'){
+        chrome.contextMenus.remove(contextMenuId, function(){
+            contextMenuId = 0;
         });
     }
-});
+})

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "rm -rf dist/* && webpack --mode development",
     "pro": "rm -rf dist/* && webpack --mode production",
-    "scss": "node-sass extension/css/index.scss extension/src/index.css",
+    "scss": "node-sass extension/css/content.scss extension/src/content.css",
     "server": "webpack-dev-server"
   },
   "keywords": [],
