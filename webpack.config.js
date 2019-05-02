@@ -1,10 +1,10 @@
 const path = require('path')
 
 module.exports = {
-    entry: './extension/js/index.js',
+    entry: './extension/js/content-origin.js',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'content.js',
+        path: path.resolve(__dirname, 'extension/js/')
     },
     module: {
         rules:[{
@@ -17,7 +17,7 @@ module.exports = {
     },
     devServer: {
         hot: true,
-        contentBase: path.resolve(__dirname, 'src'),
+        contentBase: path.resolve(__dirname, 'extension'),
         publicPath: '/dist'
     }
 }

@@ -1,36 +1,37 @@
+let contextMenuId;
 
-function sendMessageToContentScript(message, callback){
+function sendMessage(message){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        chrome.tabs.sendMessage(tabs[0].id, message, function(response){
-            if(callback) callback(response);
-        });
+        if(tabs.length == 0) return;
+        chrome.tabs.sendMessage(tabs[0].id, message);
     });
 }
 
 function createContextMenu(){
-    return chrome.contextMenus.create({
+    contextMenuId = chrome.contextMenus.create({
         title: "页面注释",
         onclick: function(e){
-            sendMessageToContentScript({create: true});
+            sendMessage({event: 'trigger'});
         }
     });
 }
+function removeContextMenu(){
+    chrome.contextMenus.remove(contextMenuId, function(){
+        contextMenuId = 0;
+    })
+}
 
-
-let contextMenuId;
-
-chrome.storage.local.get('method', function(data){
-    if(data.method == 'contextMenu'){
-        contextMenuId = createContextMenu();
+function contextMenuHandler(method){
+    if(method == 'contextmenu' && !contextMenuId){
+        createContextMenu();
+    }else if(method == 'dblclick' && contextMenuId){
+        removeContextMenu();
     }
-})
+}
 
-chrome.runtime.onMessage.addListener(function(data){
-    if(data.method == 'contextMenu' && !contextMenuId){
-        contextMenuId = createContextMenu();
-    }else if(data.method == 'dblClick'){
-        chrome.contextMenus.remove(contextMenuId, function(){
-            contextMenuId = 0;
-        });
+
+chrome.runtime.onMessage.addListener(function(msg){
+    if(msg.event == 'method'){
+        contextMenuHandler(msg.data.method);
     }
 })

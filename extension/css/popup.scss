@@ -1,0 +1,129 @@
+.switch{
+    display: flex;
+    &.right{
+        .dot{
+            left: calc(100% - 22px);
+        }
+        .container{
+            background: #ea3651;
+        }
+        .right{
+            color: blue;
+        }
+    }
+    &:not(.right){
+        .left{
+            color: blue;
+        }
+    }
+    .container{
+        width: 46px; height: 22px;
+        background: lightblue;
+        border-radius: 10px;
+        cursor: pointer;
+    
+        margin: 0 4px;
+        position: relative;
+    }
+    .dot{
+        width: 18px; height: 18px;
+        background: white;
+        border-radius: 10px;
+        margin: 2px;
+    
+        position: absolute;
+        left: 0;
+        transition: all 0.3s;
+    }
+}
+
+$container-width: 240px;
+@mixin active-header {
+    color: rgb(255, 208, 75);
+    border-bottom: 2px solid rgb(255, 208, 75);
+}
+
+.root{
+    width: $container-width;
+    border: 1px solid gray;
+    overflow: hidden;
+    &:not(.option){
+        header div:first-child{
+            @include active-header();
+        }
+        section{
+            transform: translateX(0);
+        }
+    }
+    &.option{
+        header div:last-child{
+            @include active-header();
+        }
+        section{
+            transform: translateX(-100%);
+        }
+    }
+    header{
+        padding: 0 10px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        background: rgb(84, 92, 100);
+        color: white;
+        font-size: 14px;
+
+        div{
+            padding: 6px 12px;
+            cursor: pointer;
+            &:hover{
+                background: rgb(67, 74, 80)
+            }
+        }
+    }
+    section {
+        display: flex;
+        padding: 10px;
+        transition: transform 0.8s;
+        >div{
+            flex: none;
+            width: $container-width - 20px;
+            margin-right: 20px;
+        }
+        div{ 
+            margin-bottom: 10px;
+        }
+        .input{
+            input, select{
+                width: 80px;
+            }
+        }
+    }
+    footer{
+        height: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+        border-top: 1px solid gray;
+        .print{
+            width: 56px;
+            height: 25px;
+            background: #6b6bde;
+            border-radius: 4px;
+            text-align: center;
+            margin: 10px;
+            color: white;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            &:active{
+                background: #7e7ee2;
+            }
+            &::hover{
+                background: #5757e2;
+            }
+        }
+    }
+}
