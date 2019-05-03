@@ -15,6 +15,17 @@ let Info = {
     }
 }
 
+let entry;
+let Config = {
+    get entry(){
+        return entry;
+    },
+    set entry(newV){
+        entry = newV;
+    }
+}
+
 export {
-    Info
+    Info,
+    Config
 }

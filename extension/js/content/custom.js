@@ -1,5 +1,5 @@
 import { show, queryEl as $, buildHTML } from './util.js';
-import { Info } from './data.js';
+import { Info, Config } from './data.js';
 
 let Style = null,
     Entry = null,
@@ -34,6 +34,7 @@ function triggerHandler(e){
 function setConfig(data){
     Style = data.style;
     Entry = data.entry;
+    Config.entry = data.entry;
     Method = data.method;
     // console.log('after setConfig', data, Method, Style)
 }

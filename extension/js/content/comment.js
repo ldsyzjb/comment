@@ -1,5 +1,5 @@
 import { queryEl as $, buildHTML, getDistance, show } from './util.js';
-import { Info } from './data.js';
+import { Info, Config } from './data.js';
 
 // 初始化Mask
 let mask = buildHTML(`
@@ -44,3 +44,10 @@ mask.addEventListener('click', e => {
     textarea.value = '';
     show(false);
 })
+
+textarea.addEventListener('keydown', e => {
+    if( Config.entry == 'confirm' && e.key == 'Enter'){
+        $('.pop-confirm').click();
+    }
+})
+
