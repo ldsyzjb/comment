@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    entry: './extension/js/content-origin.js',
+    entry: './extension/js/content/index.js',
     output: {
         filename: 'content.js',
         path: path.resolve(__dirname, 'extension/js/')

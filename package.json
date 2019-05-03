@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "rm -rf dist/* && webpack --mode development",
     "pro": "rm -rf dist/* && webpack --mode production",
-    "content": "node-sass extension/css/content.scss extension/src/content.css",
-    "server": "webpack-dev-server",
-    "popup": "node-sass extension/css/popup.scss extension/css/popup.css"
+    "sass": "sh ./bin/sass.sh",
+    "server": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
