@@ -64,3 +64,4 @@ body.pop-active {
     .pop-mask div button:active::before {
       display: block;
       background: rgba(51, 49, 49, 0.7); }
+
