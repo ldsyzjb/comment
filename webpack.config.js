@@ -8,34 +8,38 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist/js/')
+        path: path.resolve(__dirname, 'extension/js/')
     },
     module: {
         rules:[{
             test: /\.scss$/,
             use: [
-                MiniCssExtractPlugin.loader,
-                // 'style-loader', 
+                {
+                    loader:  MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: './dist/css/',
+                    }
+                },
                 'css-loader', 
                 'sass-loader'
             ]
         },{
             test: /\.css$/,
             use: [
-                MiniCssExtractPlugin.loader,
-                // 'style-loader', 
+                {
+                    loader:  MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: './dist/css/',
+                    }
+                },
                 'css-loader'
             ]
         }]
     },
-    devServer: {
-        hot: true,
-        contentBase: path.resolve(__dirname, 'extension'),
-        publicPath: '/dist'
-    },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: "[name].css",
+        filename: "../css/[name].css",
+        chunkFilename: '[id].css'
       })
     ]
 }

@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rf dist/* && webpack --mode development",
-    "pro": "rm -rf dist/* && webpack --mode production",
-    "sass": "sh ./bin/sass.sh",
-    "server": "webpack-dev-server"
+    "dev": "rm -rf extension/js && webpack --mode development",
+    "pro": "rm -rf extension/css && webpack --mode production"
   },
   "keywords": [],
   "author": "",

@@ -1,53 +1,94 @@
-import { queryEl as $, buildHTML, getDistance, show } from './util.js';
-import { Info, Config } from './data.js';
+import { Item as CommentItem, Comment } from './template';
+import { queryEl as $} from './util';
+import store from './store';
 
-// 初始化Mask
-let mask = buildHTML(`
-    <div class="pop-mask">
-        <textarea class="pop-input"></textarea>
-        <div>
-            <button class="pop-cancel">取消</button>
-            <button class="pop-confirm">确认</button>
-        </div>
-    </div>
-`);
-    document.body.appendChild(mask);
+function getNotScrollParent(el){
+    return getComputedStyle(el).overflow !== 'visible' ? el : getNotScrollParent(el.parentElement) 
+}
+function getOffsetToBody(el){
+    let current = el;
+    let x = 0;
+    let y = 0;
 
-let textarea = $('.pop-input', mask);
-
-
-// 处理输入信息
-mask.addEventListener('click', e => {
-    let className = e.target.className;
-    if(className == 'pop-input'){
-        return;
+    while(current.offsetParent){
+        x += current.offsetLeft;
+        y += current.offsetTop;
+        current = current.offsetParent;
     }
-    if(className == 'pop-confirm'){
-        
-        let parent = Info.parent,
-            position = Info.position;
-
-        let text = textarea.value;
-        let [offsetParent, offsetLeft, offsetTop] = getDistance(parent)
-
-        let [x, y] = [position[0] + offsetLeft, position[1] + offsetTop];
-        
-        let comment = `<div class="pop-comment" style="left: ${x}px; top: ${y}px;">${text}</div>`;
-            comment = buildHTML(comment);
-
-        offsetParent.appendChild(comment)
-
-        if(getComputedStyle(offsetParent).position == 'static'){
-            offsetParent.style.position = 'relative'
-        }
+    return [x, y]
+}``
+function getOffsetToParent(el){
+    // offsetparent 和 position有什么关系
+    let parent = getNotScrollParent(el);
+    let a = getOffsetToBody(el);
+    let b = getOffsetToBody(parent)
+    return [parent, a[0] - b[0], a[1] - b[1]];
+}
+function setRelative(elem){
+    if( getComputedStyle(elem).position === 'static' ){
+        elem.style.position = 'relative';
     }
+}
+function onComment(){
+    let text = textarea.value;
+    let [parent, left, top] = getOffsetToParent(store.parent);
+    let [x, y] = store.position;
+        x = x + left;
+        y = y + top;
+    let comment = CommentItem(x, y, text);
+
+    parent.appendChild(comment);
+    setRelative(parent);
+    onClose();
+}
+function onClose(){
+    toggleShow(false);  
     textarea.value = '';
-    show(false);
-})
-
-textarea.addEventListener('keydown', e => {
-    if( Config.entry == 'confirm' && e.key == 'Enter'){
-        $('.pop-confirm').click();
+}
+function onKeyDown(e){
+    if( store.entry == 'confirm' && e.key == 'Enter'){
+        confirm.click();
     }
-})
+}
+function toggleShow(bool){
+    if(bool === true){
+        document.body.classList.add('th-comment-active')
+    }else{
+        document.body.classList.remove('th-comment-active')
+    }
+}
 
+function triggerHandler(e){
+    // console.log('trigger event', e, Method)
+    // 当前触发的方式和设置的触发方式相同则更新信息
+    console.log(e, store)
+    if(e.type == store.method){
+        store.position = [e.offsetX, e.offsetY];
+        store.parent = e.target;
+        // dblclick方式则立即触发，否则等待右键点击触发
+        if(e.type == 'dblclick'){
+            toggleShow(true)
+        }
+    }   
+}
+
+let Editor = Comment();
+    document.body.appendChild(Editor);
+
+let textarea    = $('.th-textarea', Editor);
+let confirm     = $('.th-confirm', Editor);
+let cancel      = $('.th-cancel', Editor);
+
+confirm.addEventListener('click', onComment)
+cancel.addEventListener('click', onClose)
+textarea.addEventListener('keydown', onKeyDown)
+
+document.addEventListener('dblclick', triggerHandler);
+document.addEventListener('contextmenu', triggerHandler);
+
+
+
+export {
+    toggleShow,
+    triggerHandler
+}

@@ -1,0 +1,75 @@
+body.th-comment-active {
+  overflow: hidden; }
+  body.th-comment-active .th-comment {
+    display: block; }
+
+.pop-comment {
+  position: absolute;
+  transform: translateY(-50%);
+  color: red;
+  max-width: 220px; }
+  .pop-comment:hover {
+    border: 1px solid; }
+
+.th-comment {
+  display: none; }
+  .th-comment .th-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.5;
+    z-index: 3332; }
+  .th-comment .th-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white;
+    border-radius: 4px;
+    z-index: 3333; }
+    .th-comment .th-wrapper textarea {
+      height: 120px;
+      width: 300px;
+      font-size: 18px;
+      font-family: monospace;
+      resize: none;
+      border-radius: 4px;
+      padding: 4px; }
+    .th-comment .th-wrapper div {
+      width: 300px;
+      text-align: right;
+      margin-top: 12px; }
+    .th-comment .th-wrapper div button {
+      height: 34px;
+      border: none;
+      width: 84px;
+      border-radius: 4px;
+      background-color: white;
+      color: black;
+      font-size: 16px;
+      outline: none;
+      cursor: pointer;
+      position: relative; }
+      .th-comment .th-wrapper div button.th-confirm {
+        background-color: #409eff;
+        color: white; }
+      .th-comment .th-wrapper div button::before {
+        content: '';
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 4px; }
+      .th-comment .th-wrapper div button:hover::before {
+        display: block;
+        background: rgba(0, 0, 0, 0.1); }
+      .th-comment .th-wrapper div button:active::before {
+        display: block;
+        background: rgba(51, 49, 49, 0.1); }
+

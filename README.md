@@ -9,3 +9,10 @@
 3. 截图
 4. options初始化
 5. 样式美化
+
+
+
+Question：
+1. offsetparent 和 position有什么关系
+
+需要判断是否在输入框中，否则是处于滚动父元素中
