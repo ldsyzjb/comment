@@ -25,7 +25,9 @@
             if(tabs.length == 0) return;
             chrome.tabs.sendMessage(tabs[0].id, message, function(res){
                 if(res && res.status === true){
-                    alert('update success')
+                    let elem = queryEl('header div');
+                    elem.classList.add('loading');
+                    setTimeout(() => elem.classList.remove('loading'), 2000);
                 }else{
                     alert(typeof res == 'object' ? JSON.stringify(res) : res)
                 }

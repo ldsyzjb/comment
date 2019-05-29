@@ -1,9 +1,18 @@
 import { queryEl as $, toggleClass, updateConfig } from './util.js';
-
+import getConfig from './config.js';
 
 
 let methodElem  = $('.method');
 let entryElem   = $('.entry');
+
+getConfig.then( data => {
+    if( data && data.entry == 'confirm'){
+        entryElem.classList.add('right');
+    }
+    if( data && data.method == 'contextmenu'){
+        methodElem.classList.add('right')
+    }
+});
 
 $('.container', methodElem).addEventListener('click', e => {
   

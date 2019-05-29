@@ -1,3 +1,18 @@
+
+$blue: #409eff;
+$gray: #606266;
+$lightgray: #ebebeb;
+$container-width: 240px;
+$border: 1px solid $lightgray;
+$header-height: 30px;
+$footer-height: 40px;
+
+@mixin active-header {
+    color: rgb(255, 208, 75);
+    border-bottom: 2px solid rgb(255, 208, 75);
+}
+
+
 .switch{
     display: flex;
     &.right{
@@ -8,12 +23,12 @@
             background: #ea3651;
         }
         .right{
-            color: blue;
+            color: $blue;
         }
     }
     &:not(.right){
         .left{
-            color: blue;
+            color: $blue;
         }
     }
     .container{
@@ -37,49 +52,23 @@
     }
 }
 
-$container-width: 240px;
-@mixin active-header {
-    color: rgb(255, 208, 75);
-    border-bottom: 2px solid rgb(255, 208, 75);
-}
 
 .root{
     width: $container-width;
-    border: 1px solid gray;
-    overflow: hidden;
-    &:not(.option){
-        header div:first-child{
-            @include active-header();
-        }
-        section{
-            transform: translateX(0);
-        }
-    }
-    &.option{
-        header div:last-child{
-            @include active-header();
-        }
-        section{
-            transform: translateX(-100%);
-        }
-    }
+    margin: auto;
+    border: $border;
+    color: $gray;
     header{
         padding: 0 10px;
-
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        background: rgb(84, 92, 100);
-        color: white;
         font-size: 14px;
-
-        div{
-            padding: 6px 12px;
-            cursor: pointer;
-            &:hover{
-                background: rgb(67, 74, 80)
-            }
+        height: $header-height;
+        line-height: $header-height;
+        border: $border;
+        div.loading::after{    
+            content: 'Loading...';
+            margin-left: 20px;
+            color: red;
+            font-style: italic;
         }
     }
     section {
@@ -101,16 +90,15 @@ $container-width: 240px;
         }
     }
     footer{
-        height: 30px;
+        height: $footer-height;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        
-        border-top: 1px solid gray;
-        .print{
+        border-top: $border;
+        button{
             width: 56px;
             height: 25px;
-            background: #6b6bde;
+            background: $blue;
             border-radius: 4px;
             text-align: center;
             margin: 10px;

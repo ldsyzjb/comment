@@ -5,9 +5,9 @@
   .switch.right .container {
     background: #ea3651; }
   .switch.right .right {
-    color: blue; }
+    color: #409eff; }
   .switch:not(.right) .left {
-    color: blue; }
+    color: #409eff; }
   .switch .container {
     width: 46px;
     height: 22px;
@@ -28,31 +28,20 @@
 
 .root {
   width: 240px;
-  border: 1px solid gray;
-  overflow: hidden; }
-  .root:not(.option) header div:first-child {
-    color: #ffd04b;
-    border-bottom: 2px solid #ffd04b; }
-  .root:not(.option) section {
-    transform: translateX(0); }
-  .root.option header div:last-child {
-    color: #ffd04b;
-    border-bottom: 2px solid #ffd04b; }
-  .root.option section {
-    transform: translateX(-100%); }
+  margin: auto;
+  border: 1px solid #ebebeb;
+  color: #606266; }
   .root header {
     padding: 0 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background: #545c64;
-    color: white;
-    font-size: 14px; }
-    .root header div {
-      padding: 6px 12px;
-      cursor: pointer; }
-      .root header div:hover {
-        background: #434a50; }
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ebebeb; }
+    .root header div.loading::after {
+      content: 'Loading...';
+      margin-left: 20px;
+      color: red;
+      font-style: italic; }
   .root section {
     display: flex;
     padding: 10px;
@@ -66,15 +55,15 @@
     .root section .input input, .root section .input select {
       width: 80px; }
   .root footer {
-    height: 30px;
+    height: 40px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border-top: 1px solid gray; }
-    .root footer .print {
+    border-top: 1px solid #ebebeb; }
+    .root footer button {
       width: 56px;
       height: 25px;
-      background: #6b6bde;
+      background: #409eff;
       border-radius: 4px;
       text-align: center;
       margin: 10px;
@@ -82,8 +71,8 @@
       cursor: pointer;
       border: none;
       outline: none; }
-      .root footer .print:active {
+      .root footer button:active {
         background: #7e7ee2; }
-      .root footer .print::hover {
+      .root footer button::hover {
         background: #5757e2; }
 
